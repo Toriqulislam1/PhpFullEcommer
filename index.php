@@ -343,6 +343,7 @@ https://templatemo.com/tm-558-klassy-cafe
     <!-- ***** Chefs Area Ends ***** -->
 
     <!-- ***** Reservation Us Area Starts ***** -->
+    
     <section class="section" id="reservation">
         <div class="container">
             <div class="row">
@@ -373,7 +374,57 @@ https://templatemo.com/tm-558-klassy-cafe
                 </div>
                 <div class="col-lg-6">
                     <div class="contact-form">
-                        <form id="contact" action="" method="post">
+
+
+                                        <?php
+                            $servername = "localhost";
+                            $username = "root";
+                            $password = "";
+                            $dbname = "phpfullecommerce";
+
+                    // Create connection
+                    $conn = new mysqli($servername, $username, $password, $dbname);
+                    // Check connection
+                    if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                    }
+
+
+
+                    if (isset($_REQUEST['submit'])){
+
+                        $name= $_REQUEST['name'];
+                        $email= $_REQUEST['email'];
+                        $phone= $_REQUEST['phone'];
+                    
+                        $guests= $_REQUEST['number-guests'];
+                        $date= $_REQUEST['date'];
+                        $time= $_REQUEST['time'];
+                        $message= $_REQUEST['message'];
+
+
+                    
+                    
+
+                    $sql = "INSERT INTO register (name,email,phone,guest,alldate,alltime,message)
+
+                    VALUES ('$name','$email','$phone','$guests','$guests','$date','$time','$message')";
+
+                    if ($conn->query($sql)===true) {
+                    echo "sing up completed";
+                    } else {
+                    echo "Error: " . $sql . "<br>" . $conn->error;
+                    }
+
+                    $conn->close();
+
+                    }
+
+
+
+                    ?>
+
+                        <form id="contact" action="deshbord.php" method="post">
                           <div class="row">
                             <div class="col-lg-12">
                                 <h4>Table Reservation</h4>
@@ -390,7 +441,7 @@ https://templatemo.com/tm-558-klassy-cafe
                             </div>
                             <div class="col-lg-6 col-sm-12">
                               <fieldset>
-                                <input name="phone" type="text" id="phone" placeholder="Phone Number*" required="">
+                                <input name="phone" type="number" id="phone" placeholder="Phone Number*" required="">
                               </fieldset>
                             </div>
                             <div class="col-md-6 col-sm-12">
@@ -415,7 +466,7 @@ https://templatemo.com/tm-558-klassy-cafe
                             <div class="col-lg-6">
                                 <div id="filterDate2">    
                                   <div class="input-group date" data-date-format="dd/mm/yyyy">
-                                    <input  name="date" id="date" type="text" class="form-control" placeholder="dd/mm/yyyy">
+                                    <input  name="date" id="date" type="number" class="form-control" placeholder="dd/mm/yyyy">
                                     <div class="input-group-addon" >
                                       <span class="glyphicon glyphicon-th"></span>
                                     </div>
@@ -439,7 +490,7 @@ https://templatemo.com/tm-558-klassy-cafe
                             </div>
                             <div class="col-lg-12">
                               <fieldset>
-                                <button type="submit" id="form-submit" class="main-button-icon">Make A Reservation</button>
+                                <input type="submit" name="submit" class="main-button-icon" value="Reservertion">
                               </fieldset>
                             </div>
                           </div>
@@ -449,6 +500,7 @@ https://templatemo.com/tm-558-klassy-cafe
             </div>
         </div>
     </section>
+   
     <!-- ***** Reservation Area Ends ***** -->
 
     <!-- ***** Menu Area Starts ***** -->
