@@ -1,4 +1,13 @@
-<!doctype html>
+ 
+ <?php 
+ 
+ session_start();
+ 
+ ?>
+ 
+ 
+ 
+ <!doctype html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -8,61 +17,19 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    <title>Register-form</title>
   </head>
   <body>
-  <?php
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $dbname = "phpfullecommerce";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
+ 
 
 
 
-  if (isset($_REQUEST['submit'])){
 
-   $name= $_REQUEST['fname'];
-    $email= $_REQUEST['email'];
-    $password= $_REQUEST['password'];
    
- 
 
-
- 
-  
-
-$sql = "INSERT INTO register (name,email,password)
-VALUES ('$name','$email','$password')";
-
-if ($conn->query($sql)===true) {
-  echo "sing up completed";
-} else {
-  echo "Error: " . $sql . "<br>" . $conn->error;
-}
-
-$conn->close();
-
-}
-
-
-
-?>
-
-
-
-
-
-
-<form action="register.php" method="POST">
-  <section class="vh-100" style="background-color: #eee;">
-  <div class="container h-100">
+<form action="registerPost.php" method="POST" enctype="multipart/form-data">
+  <section class="vh-60" style="background-color: #eee;">
+  <div class="container h-50">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-lg-12 col-xl-11">
         <div class="card text-black" style="border-radius: 25px;">
@@ -77,38 +44,62 @@ $conn->close();
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="text" id="form3Example1c" class="form-control" name="fname"/>
-                      <label class="form-label" for="form3Example1c">Your Name</label>
+                    <label class="form-label" for="form3Example3c">Your Name</label>
+                      <input type="text" id="form3Example1c" class="form-control" name="name"
+                      value="<?=  $_SESSION['nam_val'] ?>">
+                      <?php 
+                      
+                      if(isset($_SESSION['nam_err'])){ ?>
+                        <strong class="text-danger"> <?= $_SESSION['nam_err']?></strong>   
+                     <?php } ?>
+                      
                     </div>
+
                   </div>
 
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="email" id="form3Example3c" class="form-control" name="email" />
-                      <label class="form-label" for="form3Example3c">Your Email</label>
+                    <label class="form-label" for="form3Example3c">Your Email</label>
+                      <input type="email" id="form3Example3c" class="form-control" name="email" value="<?= $_SESSION['eml_val']?>">
+
+                      <?php 
+                      if(isset( $_SESSION['eml_err'])){ ?>
+                        <strong class="text-danger"><?= $_SESSION['eml_err']?></strong>
+                      <?php } ?>
+                      
+                
+                      
                     </div>
                   </div>
 
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="password" id="form3Example4c" class="form-control" name="password" />
-                      <label class="form-label" for="form3Example4c">Password</label>
+                    <label class="form-label" for="form3Example4c">Password</label>
+
+                      <input type="password" id="form3Example4c" class="form-control" name="password">
+
+                      <?php if(isset($_SESSION['pass_err'])){ ?>
+                            <strong class="text-danger"><?= $_SESSION['pass_err']?></strong>
+
+                        <?php }?>
                     </div>
                   </div>
 
-             
-                 
+                   <div class="d-flex justify-content-center mx-4 mb-lg-2">
+                    <input type="submit" value="register" name="submit">
+                </div> 
 
-                  <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                    <button style="color:black" type="submit" class="btn btn-primary btn-lg " value="register" name="submit">
-                </div>
+
+
+
 
                 </form>
 
+
+
               </div>
-             
             </div>
           </div>
         </div>
@@ -129,3 +120,23 @@ $conn->close();
     -->
   </body>
 </html>
+
+<?php 
+
+unset($_SESSION['nam_err']);
+unset($_SESSION['eml_err']);
+unset($_SESSION['pass_err']);
+
+
+
+
+
+
+?>
+
+
+
+
+
+
+
