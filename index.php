@@ -375,55 +375,6 @@ https://templatemo.com/tm-558-klassy-cafe
                 <div class="col-lg-6">
                     <div class="contact-form">
 
-
-                                        <?php
-                            $servername = "localhost";
-                            $username = "root";
-                            $password = "";
-                            $dbname = "phpfullecommerce";
-
-                    // Create connection
-                    $conn = new mysqli($servername, $username, $password, $dbname);
-                    // Check connection
-                    if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
-                    }
-
-
-
-                    if (isset($_REQUEST['submit'])){
-
-                        $name= $_REQUEST['name'];
-                        $email= $_REQUEST['email'];
-                        $phone= $_REQUEST['phone'];
-                    
-                        $guests= $_REQUEST['number-guests'];
-                        $date= $_REQUEST['date'];
-                        $time= $_REQUEST['time'];
-                        $message= $_REQUEST['message'];
-
-
-                    
-                    
-
-                    $sql = "INSERT INTO register (name,email,phone,guest,alldate,alltime,message)
-
-                    VALUES ('$name','$email','$phone','$guests','$guests','$date','$time','$message')";
-
-                    if ($conn->query($sql)===true) {
-                    echo "sing up completed";
-                    } else {
-                    echo "Error: " . $sql . "<br>" . $conn->error;
-                    }
-
-                    $conn->close();
-
-                    }
-
-
-
-                    ?>
-
                         <form id="contact" action="../phpEcommerce/admin/reservation.php" method="POST">
                           <div class="row">
                             <div class="col-lg-12">

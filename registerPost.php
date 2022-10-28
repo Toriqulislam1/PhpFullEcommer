@@ -16,6 +16,7 @@ $password = $_POST['password'];
 
 //using password validation
 $after_hash= password_hash($password,PASSWORD_DEFAULT);
+
 $uppercase = preg_match('@[A-Z]@',$password);
 $lowercase = preg_match('@[a-z]@',$password);
 $number = preg_match('@[0-9]@',$password);

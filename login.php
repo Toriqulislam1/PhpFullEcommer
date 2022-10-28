@@ -13,67 +13,10 @@
   </head>
   <body>
 
-             
-
-    
-    <?php
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $dbname = "phpfullecommerce";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
-
-if(isset($_REQUEST['submit'])){
-  $email= $_REQUEST['email'];
-  $password= $_REQUEST['password'];
-
-$sql = "INSERT INTO login (email,password)
-VALUES ('$email','$password')";
-
-if ($conn->query($sql)===true) {
-  echo "New record created successfully";
-} else {
-  echo "Error: " . $sql . "<br>" . $conn->error;
-}
-
-$conn->close();
-}
+ 
 
 
-
-
-
-?>
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <form action="login.php" method="post">
+  <form action="login_post.php" method="POST">
   <section class="vh-100" style="background-color: #eee;">
   <div class="container h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
